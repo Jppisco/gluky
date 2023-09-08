@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'list-I', pathMatch: 'full' },
   { path: 'list-I', component: ListInstanciaComponent },
   { path: 'create-I', component: CreateInstanciaComponent },
+  { path: 'edit/:id', component: CreateInstanciaComponent },
   { path: '**', redirectTo: 'list-I', pathMatch: 'full' },
 ];
 

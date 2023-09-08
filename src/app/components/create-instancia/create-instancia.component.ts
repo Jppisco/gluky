@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InstanciaService } from 'src/app/services/instancia.service';
 
 @Component({
@@ -10,13 +10,16 @@ import { InstanciaService } from 'src/app/services/instancia.service';
 })
 export class CreateInstanciaComponent implements OnInit {
   createInstancia: FormGroup;
+  id: string | null;
+  titulo = 'Agregar Instancia';
   ngOnInit(): void {
-
+    this.esEditar();
   }
   constructor(
     private _instanciaService: InstanciaService,
     private fb: FormBuilder,
     private router: Router,
+    private aRoute: ActivatedRoute
 
   ) {
     this.createInstancia = this.fb.group({
@@ -25,8 +28,22 @@ export class CreateInstanciaComponent implements OnInit {
       doc_id: ['', Validators.required],
       pais: ['', Validators.required],
     })
+    //tomamos el id que viene por la ruta
+    this.id = this.aRoute.snapshot.paramMap.get('id');
+    console.log(this.id)
   }
 
+  //funcion para saber si el id esta null o lleva parametro, depende de eso ejecuta el actualizar o el añadir
+  agregarEditarIntancias() {
+
+    if (this.id === null) {
+      return this.agregarIntancias();
+    } else {
+      return this.editarInstancia(this.id);
+    }
+  }
+
+  //funcion para agregar instancias
   agregarIntancias() {
     //definimos un objeto con todos los atributos del formulario
     const instancia: any = {
@@ -39,13 +56,43 @@ export class CreateInstanciaComponent implements OnInit {
     }
     //hacemos llamado a la funcion que hay en el servicio y almacenamos un firebase
     this._instanciaService.agregarInstancia(instancia).then(() => {
-      console.log('empleado registrado con exito');
+      console.log('Instancia registrado con exito');
       this.router.navigate(['/list-I'])
     }).catch(error => {
       console.log(error)
     })
+  }
+  editarInstancia(id: string) {
+    const instancia: any = {
+      id_instancia: this.createInstancia.value.id_instancia,
+      nombre: this.createInstancia.value.nombre,
+      doc_id: this.createInstancia.value.doc_id,
+      pais: this.createInstancia.value.pais,
+      fechaActualizacion: new Date()
+    }
 
+    this._instanciaService.actualizarInstancia(id, instancia).then(() => {
+      console.log("Instancia Actualizada");
+      this.router.navigate(['/list-I'])
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
+  esEditar() {
+    if (this.id !== null) {
+      this.titulo = 'Editar instancia';
+      this._instanciaService.getInstancia(this.id).subscribe(data => {
+        console.log(data.payload.data()['nombre']);
+        this.createInstancia.setValue({
+          id_instancia: data.payload.data()['id_instancia'],
+          nombre: data.payload.data()['nombre'],
+          doc_id: data.payload.data()['doc_id'],
+          pais: data.payload.data()['pais'],
+        })
+
+      })
+    }
   }
 
 }

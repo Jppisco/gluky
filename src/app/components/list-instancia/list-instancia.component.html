@@ -21,7 +21,7 @@
         <td>hay que decodificar las fechas</td>
         <td>hay que decodificar las fechas</td>
         <td><i (click)="eliminarInstancia(instancia.id)" class="fas fa-trash-alt fa-lg"></i></td>
-        <td><i class="fas fa-edit fa-lg"></i></td>
+        <td><i class="fas fa-edit fa-lg" [routerLink]="['/edit/',instancia.id]"></i></td>
         <td><i class="fas fa-users fa-lg"></i></td>
       </tr>
     </tbody>
