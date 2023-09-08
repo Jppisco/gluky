@@ -1,0 +1,30 @@
+<div class="container">
+  <h5 *ngIf="instancias.length == 0" style="margin-top: 30px;">No hay datos</h5>
+  <table *ngIf="instancias.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Documento ID</th>
+        <th>Pais</th>
+        <th>Creacion</th>
+        <th>Actualizacion</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let instancia of instancias">
+        <td>{{instancia.id_instancia}}</td>
+        <td>{{instancia.nombre}}</td>
+        <td>{{instancia.doc_id}}</td>
+        <td>{{instancia.pais}}</td>
+        <td>hay que decodificar las fechas</td>
+        <td>hay que decodificar las fechas</td>
+        <td><i (click)="eliminarInstancia(instancia.id)" class="fas fa-trash-alt fa-lg"></i></td>
+        <td><i class="fas fa-edit fa-lg"></i></td>
+        <td><i class="fas fa-users fa-lg"></i></td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="agregar" routerLink="/create-I">Añadir</button>
+</div>
