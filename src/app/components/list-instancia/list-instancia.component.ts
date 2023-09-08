@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { InstanciaService } from 'src/app/services/instancia.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-instancia',
@@ -37,12 +38,30 @@ export class ListInstanciaComponent implements OnInit {
   }
 
   eliminarInstancia(id: string) {
-    this._instanciaService.eliminarInstancia(id).then(() => {
-      console.log(id);
-      console.log('instancia eliminada correctamente')
-    }).catch(error => {
-      console.log(error)
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Esta Accion es irreversible!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._instanciaService.eliminarInstancia(id).then(() => {
+          console.log(id);
+          console.log('instancia eliminada correctamente')
+        }).catch(error => {
+          console.log(error)
+        })
+        Swal.fire(
+          'Eliminado!',
+          'La instancia ha sido borrada correctamente.',
+          'success'
+        )
+      }
     })
+
 
   }
 

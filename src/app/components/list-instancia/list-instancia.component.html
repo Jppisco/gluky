@@ -18,8 +18,8 @@
         <td>{{instancia.nombre}}</td>
         <td>{{instancia.doc_id}}</td>
         <td>{{instancia.pais}}</td>
-        <td>hay que decodificar las fechas</td>
-        <td>hay que decodificar las fechas</td>
+        <td>{{instancia.fechaCreacion * 1000 | date }}</td>
+        <td>{{instancia.fechaActualizacion * 1000 | date}}</td>
         <td><i (click)="eliminarInstancia(instancia.id)" class="fas fa-trash-alt fa-lg"></i></td>
         <td><i class="fas fa-edit fa-lg" [routerLink]="['/edit/',instancia.id]"></i></td>
         <td><i class="fas fa-users fa-lg"></i></td>

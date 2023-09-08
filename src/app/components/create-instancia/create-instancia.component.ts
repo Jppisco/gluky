@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InstanciaService } from 'src/app/services/instancia.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-instancia',
@@ -19,7 +20,8 @@ export class CreateInstanciaComponent implements OnInit {
     private _instanciaService: InstanciaService,
     private fb: FormBuilder,
     private router: Router,
-    private aRoute: ActivatedRoute
+    private aRoute: ActivatedRoute,
+
 
   ) {
     this.createInstancia = this.fb.group({
@@ -56,12 +58,20 @@ export class CreateInstanciaComponent implements OnInit {
     }
     //hacemos llamado a la funcion que hay en el servicio y almacenamos un firebase
     this._instanciaService.agregarInstancia(instancia).then(() => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Instancia registrado con exito',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log('Instancia registrado con exito');
       this.router.navigate(['/list-I'])
     }).catch(error => {
       console.log(error)
     })
   }
+  //funcion para editar instancias
   editarInstancia(id: string) {
     const instancia: any = {
       id_instancia: this.createInstancia.value.id_instancia,
@@ -72,6 +82,13 @@ export class CreateInstanciaComponent implements OnInit {
     }
 
     this._instanciaService.actualizarInstancia(id, instancia).then(() => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Instancia Actualizada con exito',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log("Instancia Actualizada");
       this.router.navigate(['/list-I'])
     }).catch(error => {
@@ -79,6 +96,7 @@ export class CreateInstanciaComponent implements OnInit {
     })
   }
 
+  //rellenamos el HTML con el set value y con lo que retorna el metodo de la instancia
   esEditar() {
     if (this.id !== null) {
       this.titulo = 'Editar instancia';
