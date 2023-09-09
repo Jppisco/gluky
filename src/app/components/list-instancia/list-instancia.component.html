@@ -22,7 +22,7 @@
         <td>{{instancia.fechaActualizacion * 1000 | date}}</td>
         <td><i (click)="eliminarInstancia(instancia.id)" class="fas fa-trash-alt fa-lg"></i></td>
         <td><i class="fas fa-edit fa-lg" [routerLink]="['/edit/',instancia.id]"></i></td>
-        <td><i class="fas fa-users fa-lg"></i></td>
+        <td><i class="fas fa-users fa-lg" [routerLink]="['/list-U/',instancia.id_instancia]"></i></td>
       </tr>
     </tbody>
   </table>

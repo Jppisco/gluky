@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { CreateInstanciaComponent } from './components/create-instancia/create-instancia.component';
 import { ListInstanciaComponent } from './components/list-instancia/list-instancia.component';
 import { environment } from 'src/environments/environment.prod';
+import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
+import { ListUsuarioComponent } from './components/list-usuario/list-usuario.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { environment } from 'src/environments/environment.prod';
     AppComponent,
     CreateInstanciaComponent,
     ListInstanciaComponent,
+    CreateUsuarioComponent,
+    ListUsuarioComponent,
 
   ],
   imports: [
