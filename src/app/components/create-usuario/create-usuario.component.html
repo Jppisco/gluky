@@ -1,1 +1,9 @@
-<p>{{id_instancia}}</p>
+<button class="agregar" routerLink="/list-I">volver</button>
+<div class="container">
+  <h1>{{titulo}}</h1>
+  <form [formGroup]="createUsuario" (ngSubmit)="agregarUsuarios()">
+    <input type="text" placeholder="Usuario" formControlName="usuario">
+    <input type="text" placeholder="Clave" formControlName="clave">
+    <button class="submit">Agregar</button>
+  </form>
+</div>

@@ -101,6 +101,7 @@ export class CreateInstanciaComponent implements OnInit {
     if (this.id !== null) {
       this.titulo = 'Editar instancia';
       this._instanciaService.getInstancia(this.id).subscribe(data => {
+        console.log(data)
         console.log(data.payload.data()['nombre']);
         this.createInstancia.setValue({
           id_instancia: data.payload.data()['id_instancia'],
