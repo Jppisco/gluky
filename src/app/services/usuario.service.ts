@@ -26,6 +26,11 @@ export class UsuarioService {
     return this.firestore.collection("usuarios").doc(id).update(data);
   }
 
+  //hacemos un metodo que nos va a retornar todos los datos dependiendo el id
+  getUsuario(id: string): Observable<any> {
+    return this.firestore.collection('usuarios').doc(id).snapshotChanges();
+  }
+
   getUsuariosBy(id_instancia: string): Observable<any> {
     return this.firestore.collection('usuarios', ref => ref.where(id_instancia, '==', 'id_instancia')).valueChanges();
   }

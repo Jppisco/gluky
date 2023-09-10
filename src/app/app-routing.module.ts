@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'list-U', component: ListUsuarioComponent },
   { path: 'list-U/:id_instancia', component: ListUsuarioComponent },
   { path: 'create-U/:id_instancia', component: CreateUsuarioComponent },
-  { path: 'edit-U/:id_instancia', component: CreateUsuarioComponent },
+  { path: 'edit-U/:id/:id_instancia', component: CreateUsuarioComponent },
   { path: '**', redirectTo: 'list-I', pathMatch: 'full' },
 ];
 

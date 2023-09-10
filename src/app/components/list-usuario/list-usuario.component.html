@@ -24,7 +24,7 @@
         <td class="table__cell table__cell--options"><i (click)="eliminarUsuario(usuario.id)"
             class="fas fa-trash-alt fa-lg"></i></td>
         <td class="table__cell table__cell--options"><i class="fas fa-edit fa-lg"
-            [routerLink]="['/edit-U/',usuario.id]"></i></td>
+            [routerLink]="['/edit-U/',usuario.id,usuario.id_instancia]"></i></td>
       </tr>
     </tbody>
   </table>
